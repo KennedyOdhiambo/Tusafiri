@@ -1,6 +1,7 @@
-import type { Metadata } from 'next';
-import { Inter, Poppins } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 import './globals.css';
+import Header from '@/components/Header';
+import ThemeProvider from '@/components/ThemeProvider';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -14,7 +15,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={poppins.className}>{children}</body>
+      <body className={poppins.className}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <Header />
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
