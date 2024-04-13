@@ -13,7 +13,7 @@ const sampleLocations = [
 export default function SearchAvailableTrips() {
   return (
     <div className="inline-flex w-full justify-center">
-      <Card className="flex flex-col gap-2 p-5 xl:grid xl:grid-cols-4">
+      <Card className="flex flex-col gap-2 p-5 shadow-md xl:grid xl:grid-cols-4">
         <div className="flex w-fit flex-col items-center gap-3 md:grid md:grid-cols-3 md:items-end xl:col-span-3">
           <DropdownSelect label="Travelling From" options={sampleLocations} />
           <DropdownSelect label="Travelling To" options={sampleLocations} />
