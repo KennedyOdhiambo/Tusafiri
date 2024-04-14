@@ -4,7 +4,7 @@ import { ModeToggle } from './ui/modeToggle';
 
 export default function Header() {
   return (
-    <div className="fixed inset-0 z-50 inline-flex h-12 w-full items-center justify-between bg-primary p-2 text-xs text-primary-foreground md:px-6">
+    <div className="fixed inset-0 z-50 inline-flex h-12 w-full items-center justify-between bg-primary p-2 text-xs text-primary-foreground shadow md:px-6">
       <div className="hidden flex-row justify-start gap-5 sm:flex">
         <div className="inline-flex items-center gap-1">
           <Phone className="size-5" />

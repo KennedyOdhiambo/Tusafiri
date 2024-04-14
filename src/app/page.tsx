@@ -2,20 +2,18 @@ import Image from 'next/image';
 import heroImage from '../../public/heroImage.svg';
 import SearchAvailableTrips from '@/features/trips/SearchAvailableTrips';
 import WhyChooseUs from '@/components/WhyChooseUs';
+import TopTravelledRoutes from '@/components/TopTravelledRoutes';
 
 export default function Home() {
   return (
-    <main className="mt-12 min-h-screen">
-      <div className="relative">
-        <Image src={heroImage} alt="hero-image" priority height={600} />
-
-        <div className="absolute inset-x-0 bottom-0 m-auto mx-auto w-full translate-y-60 transform md:translate-y-20 xl:translate-y-14">
-          <SearchAvailableTrips />
+    <main className="mt-12 flex min-h-screen flex-col gap-5">
+      <Image src={heroImage} alt="hero-image" priority height={420} width={1440} className="hero-image mt-5" />
+      <div className="flex flex-col gap-10 md:gap-16 lg:gap-20">
+        <SearchAvailableTrips />
+        <div className=" flex flex-col gap-10 px-8 md:gap-16 lg:gap-20">
+          <WhyChooseUs />
+          <TopTravelledRoutes />
         </div>
-      </div>
-
-      <div className="mt-64 flex w-full flex-col items-center p-6 md:mt-24 md:px-12 lg:mt-20 lg:px-20">
-        <WhyChooseUs />
       </div>
     </main>
   );

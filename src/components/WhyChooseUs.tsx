@@ -7,7 +7,7 @@ export default function WhyChooseUs() {
   return (
     <div className="flex flex-col items-center gap-5">
       <h1 className="text-2xl font-bold tracking-wide">
-        Why <span className="text-red-400 underline decoration-4 underline-offset-8">Choose</span> Us ?
+        Why <span className="text-red-400 ">Choose</span> Us ?
       </h1>
 
       <div className="flex flex-col gap-5 lg:flex-row lg:gap-7">
