@@ -1,9 +1,9 @@
-import Image from 'next/image';
 import nairobi from '../../public/nairobi.webp';
 import kisumu from '../../public/kisumu.webp';
 import nakuru from '../../public/nakuru.webp';
 import mombasa from '../../public/mombasa.webp';
 import eldoret from '../../public/eldoret.webp';
+import TravelRouteCard from './TravelRouteCard';
 
 export default function TopTravelledRoutes() {
   return (
@@ -12,32 +12,12 @@ export default function TopTravelledRoutes() {
         Our Top <span className="text-red-400">Destinations</span>
       </h1>
 
-      <div className="grid grid-cols-5 gap-2 md:gap-3.5 lg:gap-5">
-        <Image
-          src={nairobi}
-          alt="nairobi"
-          className="cursor-pointer rounded-2xl transition-opacity duration-200 hover:opacity-70"
-        />
-        <Image
-          src={kisumu}
-          alt="kisumu"
-          className="cursor-pointer rounded-2xl transition-opacity duration-200 hover:opacity-70"
-        />
-        <Image
-          src={mombasa}
-          alt="mombasa"
-          className="cursor-pointer rounded-2xl transition-opacity duration-200 hover:opacity-70"
-        />
-        <Image
-          src={eldoret}
-          alt="eldoret"
-          className="cursor-pointer rounded-2xl transition-opacity duration-200 hover:opacity-70"
-        />
-        <Image
-          src={nakuru}
-          alt="nakuru"
-          className=" cursor-pointer rounded-2xl transition-opacity duration-200 hover:opacity-70"
-        />
+      <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3.5 lg:grid-cols-5 lg:gap-5">
+        <TravelRouteCard from="" to="Nairobi" src={nairobi} />
+        <TravelRouteCard from="Nairobi" to="Kisumu" src={kisumu} />
+        <TravelRouteCard from="Nairobi" to="Mombasa" src={mombasa} />
+        <TravelRouteCard from="Nairobi" to="Eldoret" src={eldoret} />
+        <TravelRouteCard from="Nairobi" to="Nakuru" src={nakuru} />
       </div>
     </div>
   );
