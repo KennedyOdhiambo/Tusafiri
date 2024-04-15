@@ -24,7 +24,7 @@ export default function SignupModal() {
           className={`${isScrolled ? ' text-primary-foreground' : 'text-primary'} inline-flex items-center gap-1 text-xs`}
         >
           <User className="size-5" />
-          <span>Sign Up</span>
+          <span className="font-semibold tracking-wide">Sign Up</span>
         </Button>
       </DialogTrigger>
 

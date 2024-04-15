@@ -26,5 +26,3 @@ export default function DropdownSelect({ placeholder, options, label }: Dropdown
     </div>
   );
 }
-
-//w-[280px]

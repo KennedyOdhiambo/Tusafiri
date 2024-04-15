@@ -26,7 +26,7 @@ export default function LoginModal() {
           } inline-flex items-center gap-1 text-xs`}
         >
           <LogIn className="size-5" />
-          <span>Log in</span>
+          <span className="font-semibold tracking-wide">Log in</span>
         </Button>
       </DialogTrigger>
 

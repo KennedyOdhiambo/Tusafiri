@@ -7,7 +7,8 @@ export default function Footer() {
         <CardContent className=" md:text-center">
           <CardTitle>About Us</CardTitle>
           <CardDescription className="mt-1">
-            A leading travelling company connecting Rift Valley to the rest of Kenya
+            Safari aims to bring ease and convenience to millions of Kenyan travellers. We work with the country’s
+            leading bus operators to bring you the convenience of digital bookings.
           </CardDescription>
         </CardContent>
 
@@ -21,9 +22,9 @@ export default function Footer() {
 
         <CardContent className="md:text-center">
           <CardTitle>Our Offices</CardTitle>
-          <CardDescription className="mt-1">
-            <span>Mfangano Street, Nairobi</span>
-            <span>Koitalel Avenue, Eldoret</span>
+          <CardDescription className="mt-1 flex flex-col">
+            <span>Vision Towers, Nairobi</span>
+            <span>Wazalendo plaza, Eldoret</span>
           </CardDescription>
         </CardContent>
       </div>
