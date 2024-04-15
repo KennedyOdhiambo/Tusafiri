@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '@/components/ui/Button';
 import {
   Dialog,
@@ -10,12 +12,19 @@ import {
 
 import { LogIn } from 'lucide-react';
 import LoginForm from './LoginForm';
+import useScrollY from '@/lib/hooks/useScrollY';
 
 export default function LoginModal() {
+  const isScrolled = useScrollY();
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={'link'} className="inline-flex items-center gap-1 text-xs text-white">
+        <Button
+          variant={'link'}
+          className={`${
+            isScrolled ? ' text-primary-foreground' : 'text-primary'
+          } inline-flex items-center gap-1 text-xs`}
+        >
           <LogIn className="size-5" />
           <span>Log in</span>
         </Button>

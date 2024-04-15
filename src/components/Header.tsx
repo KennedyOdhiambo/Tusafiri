@@ -1,11 +1,17 @@
+'use client';
 import { Mail, Phone } from 'lucide-react';
 import { ModeToggle } from './ui/modeToggle';
 import LoginModal from '@/features/authentication/LoginModal';
 import SignupModal from '@/features/authentication/SignupModal';
+import { Card } from './ui/card';
+import useScrollY from '@/lib/hooks/useScrollY';
 
 export default function Header() {
+  const isScrolled = useScrollY();
   return (
-    <div className="fixed inset-0 z-50 inline-flex h-12 w-full items-center justify-between bg-primary p-2 text-xs text-primary-foreground shadow md:px-6">
+    <Card
+      className={`${isScrolled ? 'bg-primary text-primary-foreground shadow-md' : 'bg-background text-primary shadow-none'} fixed inset-0 z-50 inline-flex h-12 w-full items-center justify-between rounded-none border-0 border-b p-2 text-xs transition-colors duration-200 md:px-6`}
+    >
       <div className="hidden flex-row justify-start gap-5 sm:flex">
         <div className="inline-flex items-center gap-1">
           <Phone className="size-5" />
@@ -24,6 +30,6 @@ export default function Header() {
 
         <ModeToggle />
       </div>
-    </div>
+    </Card>
   );
 }
