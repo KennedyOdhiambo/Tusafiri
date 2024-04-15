@@ -1,6 +1,7 @@
-import { LogIn, Mail, Phone, User } from 'lucide-react';
-import { Button } from './ui/Button';
+import { Mail, Phone } from 'lucide-react';
 import { ModeToggle } from './ui/modeToggle';
+import LoginModal from '@/features/authentication/LoginModal';
+import SignupModal from '@/features/authentication/SignupModal';
 
 export default function Header() {
   return (
@@ -18,15 +19,8 @@ export default function Header() {
       </div>
 
       <div className="inline-flex w-full items-center justify-end">
-        <Button variant={'link'} className="inline-flex items-center gap-1 text-xs text-white">
-          <LogIn className="size-5" />
-          <span>Log in</span>
-        </Button>
-
-        <Button variant={'link'} className="me-2 inline-flex gap-1 text-xs text-white">
-          <User className="size-5" />
-          <span>Sign Up</span>
-        </Button>
+        <LoginModal />
+        <SignupModal />
 
         <ModeToggle />
       </div>
