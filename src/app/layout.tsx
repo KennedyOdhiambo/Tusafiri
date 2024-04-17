@@ -19,7 +19,7 @@ export default function RootLayout({
       <body className={poppins.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Header />
-          {children}
+          <div className="mt-12">{children}</div>
           <Footer />
         </ThemeProvider>
       </body>
