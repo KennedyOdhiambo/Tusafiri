@@ -2,7 +2,8 @@ import NavigationBreadCrumbs from '@/components/NavigationBreadCrumbs';
 import BusOperators from '@/features/shuttles/BusOperators';
 import BusTypes from '@/features/shuttles/BusTypes';
 import Facilities from '@/features/shuttles/Facilities';
-import AvailableTripCard from '@/features/trips/AvailableTripCard';
+
+import AvailableTrips from '@/features/trips/AvailableTrips';
 import SearchAvailableTripsBooking from '@/features/trips/SearchAvailableTripsBooking';
 
 export default function Booking() {
@@ -14,20 +15,14 @@ export default function Booking() {
 
       <SearchAvailableTripsBooking />
 
-      <div className="flex flex-row gap-20 lg:w-[1010px]">
+      <div className="flex flex-row gap-20 lg:mt-8 lg:w-[1010px]">
         <div className="hidden lg:flex lg:flex-col">
           <BusTypes />
           <Facilities />
           <BusOperators />
         </div>
 
-        <AvailableTripCard />
-
-        <div className="hidden lg:flex lg:flex-col">
-          <BusTypes />
-          <Facilities />
-          <BusOperators />
-        </div>
+        <AvailableTrips />
       </div>
     </div>
   );
