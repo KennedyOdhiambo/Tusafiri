@@ -1,19 +1,27 @@
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card';
 
-import bus from '../../../public/easycoach.webp';
+import bus from '../../../public/bus-inbound-alt-svgrepo-com.svg';
 import Image from 'next/image';
+import BookingDrawer from '../booking/BookingDrawer';
 
 export default function AvailableTripCard() {
   return (
     <Card className=" h-fit w-full shadow xl:max-w-2xl">
       <CardHeader className="flex w-full flex-row items-center justify-between">
         <CardDescription className="mt-1 flex flex-col items-center tracking-wide">
+          <span className="text-xs">From:</span>
           <span className="text-base font-semibold uppercase">Nairobi</span>
           <span>9:00 PM</span>
         </CardDescription>
-        <Image src={bus} alt="bus" className="" />
+
+        <div className="flex flex-col items-center gap-0.5">
+          <CardDescription>Easy Coach Travellers</CardDescription>
+          <Image src={bus} alt="bus" className=" w-10" />
+        </div>
+
         <CardDescription className="flex flex-col items-center tracking-wide">
+          <span className=" text-xs">To:</span>
           <span className="text-base font-semibold uppercase">Kisumu</span>
           <span>4:00 AM</span>
         </CardDescription>
@@ -29,7 +37,8 @@ export default function AvailableTripCard() {
             Ticket Price: <span className="font-semibold text-destructive">Ksh. 500</span>
           </CardDescription>
         </div>
-        <Button className="">Select seat</Button>
+
+        <BookingDrawer />
       </CardContent>
     </Card>
   );
