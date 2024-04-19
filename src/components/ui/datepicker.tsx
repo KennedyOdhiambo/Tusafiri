@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 
 import { cn } from '@/lib/utils';
 import { Popover, PopoverContent, PopoverTrigger } from './popover';
-import { Button } from './Button';
+import { Button } from './button';
 import { Calendar } from './calendar';
 
 export function DatePicker() {

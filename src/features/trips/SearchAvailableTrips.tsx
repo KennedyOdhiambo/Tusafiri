@@ -1,7 +1,7 @@
 import { Card } from '@/components/ui/card';
 import DropdownSelect from '@/components/DropdownSelect';
 import { DatePicker } from '@/components/ui/datepicker';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui/button';
 
 const sampleLocations = [
   { value: '101', text: 'Kisumu' },
