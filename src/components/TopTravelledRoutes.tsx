@@ -12,7 +12,7 @@ export default function TopTravelledRoutes() {
         Our Top <span className="text-red-400">Destinations</span>
       </h1>
 
-      <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3.5 lg:grid-cols-5 lg:gap-5">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-2 md:grid-cols-3 md:gap-3.5 lg:grid-cols-5 lg:gap-5">
         <TravelRouteCard from="" to="Nairobi" src={nairobi} />
         <TravelRouteCard from="Nairobi" to="Kisumu" src={kisumu} />
         <TravelRouteCard from="Nairobi" to="Mombasa" src={mombasa} />

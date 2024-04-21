@@ -1,7 +1,9 @@
+'use client';
 import { Card } from '@/components/ui/card';
 import DropdownSelect from '@/components/DropdownSelect';
 import { DatePicker } from '@/components/ui/datepicker';
 import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
 
 const sampleLocations = [
   { value: '101', text: 'Kisumu' },
@@ -11,6 +13,8 @@ const sampleLocations = [
 ];
 
 export default function SearchAvailableTrips() {
+  const router = useRouter();
+
   return (
     <div className="inline-flex w-full justify-center">
       <Card className="flex flex-col gap-2 p-5 shadow-sm xl:grid xl:grid-cols-4">
@@ -20,7 +24,11 @@ export default function SearchAvailableTrips() {
           <DatePicker />
         </div>
 
-        <Button variant={'default'} className="mt-2 w-[240px] self-end xl:w-[180px] xl:justify-self-end">
+        <Button
+          onClick={() => router.push('/booking')}
+          variant={'default'}
+          className="mt-2 w-[240px] self-end xl:w-[180px] xl:justify-self-end"
+        >
           Find Bus
         </Button>
       </Card>

@@ -9,9 +9,9 @@ export function PassengerDetails() {
       <CardHeader className=" mb-2 grid grid-cols-2 items-center px-0">
         <CardTitle className="text-2xl">Passenger Details</CardTitle>
         <CardDescription className="flex flex-row gap-5 self-end justify-self-end font-bold">
-          <p>Nairobi</p>
+          <span>Nairobi</span>
           <span>to</span>
-          <p>Eldoret</p>
+          <span>Eldoret</span>
         </CardDescription>
       </CardHeader>
 
