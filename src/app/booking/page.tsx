@@ -10,7 +10,7 @@ export default function Booking() {
   return (
     <div className="flex min-h-screen flex-col gap-10 p-6 lg:items-center">
       <div className="lg:w-[1012px]">
-        <NavigationBreadCrumbs />
+        <NavigationBreadCrumbs path={['booking']} />
       </div>
 
       <SearchAvailableTripsBooking />
