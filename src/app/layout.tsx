@@ -3,6 +3,7 @@ import './globals.css';
 import Header from '@/components/Header';
 import ThemeProvider from '@/components/ThemeProvider';
 import Footer from '@/components/Footer';
+import { Toaster } from '@/components/ui/toaster';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -19,7 +20,10 @@ export default function RootLayout({
       <body className={poppins.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Header />
-          <div className="mt-12">{children}</div>
+          <div className="mt-12 min-h-screen">
+            {children}
+            <Toaster />
+          </div>
           <Footer />
         </ThemeProvider>
       </body>

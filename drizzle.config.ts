@@ -5,7 +5,7 @@ const dev = process.env.VERCEL_ENV !== 'production';
 loadEnvConfig('./', dev);
 
 export default defineConfig({
-  schema: './src/db/schema.ts',
+  schema: './src/db/schema/*',
   out: './src/db/migrations',
   driver: 'pg',
   dbCredentials: {

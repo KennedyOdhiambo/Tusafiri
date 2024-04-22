@@ -1,5 +1,3 @@
-'use client';
-
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -30,8 +28,8 @@ export default function SignupModal() {
 
       <DialogContent className="w-full max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-2xl">Login</DialogTitle>
-          <DialogDescription>Enter your phonenumber below to login to your account.</DialogDescription>
+          <DialogTitle className="text-2xl">Sign up</DialogTitle>
+          <DialogDescription>Enter your details below to complete registration</DialogDescription>
         </DialogHeader>
 
         <SignupForm />

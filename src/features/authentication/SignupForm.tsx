@@ -1,31 +1,68 @@
 import { Button } from '@/components/ui/button';
-import { DialogFooter } from '@/components/ui/dialog';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Newuser, signupSchema } from '@/validation/signupValidation';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import useSubmitSignup from './useSubmitSignup';
 
 export default function SignupForm() {
+  const { onSubmit, isLoading } = useSubmitSignup();
+  const form = useForm<Newuser>({
+    resolver: zodResolver(signupSchema),
+  });
+
   return (
     <>
-      <form action="" className="flex flex-col gap-4">
-        <div className="grid gap-2">
-          <Label htmlFor="fullName">Full Name</Label>
-          <Input id="fullName" type="text" required />
-        </div>
-        <div className="grid gap-2">
-          <Label htmlFor="phoneNumber">Phone Number</Label>
-          <Input className=" outline-none" id="phoneNumber" type="tel" placeholder="254-727-533-551" required />
-        </div>
-        <div className="grid gap-2">
-          <Label htmlFor="password">Password</Label>
-          <Input id="password" type="password" required />
-        </div>
-      </form>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
+          <FormField
+            control={form.control}
+            name="fullName"
+            render={() => (
+              <FormItem>
+                <FormLabel>Full Name</FormLabel>
+                <FormControl>
+                  <Input type="text" {...form.register('fullName')} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-      <DialogFooter>
-        <Button className="w-full" type="submit">
-          Sign up
-        </Button>
-      </DialogFooter>
+          <FormField
+            control={form.control}
+            name="phoneNumber"
+            render={() => (
+              <FormItem>
+                <FormLabel>Phone Number</FormLabel>
+                <FormControl>
+                  <Input type="tel" {...form.register('phoneNumber')} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="password"
+            render={() => (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <FormControl>
+                  <Input type="password" {...form.register('password')} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <Button disabled={isLoading} type="submit">
+            {isLoading ? 'Submitting...' : 'Submit'}
+          </Button>
+        </form>
+      </Form>
     </>
   );
 }
