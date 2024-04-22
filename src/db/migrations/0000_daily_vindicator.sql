@@ -1,21 +1,21 @@
 CREATE TABLE IF NOT EXISTS "bookings" (
-	"booking_id" serial PRIMARY KEY NOT NULL,
-	"route_id" serial NOT NULL,
-	"user_id" serial NOT NULL,
+	"booking_id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"route_id" uuid,
+	"user_id" uuid,
 	"traveller_name" varchar(256) NOT NULL,
 	"traveller_phone" varchar(256) NOT NULL,
 	"seats" text[]
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "payments" (
-	"payment_id" serial PRIMARY KEY NOT NULL,
-	"bookingId" serial NOT NULL,
-	"user_id" serial NOT NULL,
+	"payment_id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"bookingId" uuid,
+	"user_id" uuid,
 	"payment_phone" varchar(256) NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "shuttles" (
-	"shuttle_id" serial PRIMARY KEY NOT NULL,
+	"shuttle_id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"shuttle_operator" varchar(256) NOT NULL,
 	"bus_type" varchar DEFAULT 'normal',
 	"facilities" varchar DEFAULT 'none',
@@ -23,8 +23,8 @@ CREATE TABLE IF NOT EXISTS "shuttles" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "travel_routes" (
-	"route_id" serial PRIMARY KEY NOT NULL,
-	"shuttle_id" serial NOT NULL,
+	"route_id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"shuttle_id" uuid,
 	"departure" varchar(256) NOT NULL,
 	"destination" varchar(256) NOT NULL,
 	"travel_date" date,
@@ -33,13 +33,14 @@ CREATE TABLE IF NOT EXISTS "travel_routes" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "users" (
-	"user_id" serial PRIMARY KEY NOT NULL,
+	"user_id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"name" varchar(256) NOT NULL,
 	"phone" varchar(256) NOT NULL,
 	"password" varchar(256) NOT NULL,
 	"role" varchar DEFAULT 'customer',
 	"created_at" timestamp,
-	"updated_at" timestamp
+	"updated_at" timestamp,
+	CONSTRAINT "users_phone_unique" UNIQUE("phone")
 );
 --> statement-breakpoint
 DO $$ BEGIN

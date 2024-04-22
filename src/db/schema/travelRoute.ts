@@ -1,9 +1,9 @@
-import { date, decimal, integer, pgTable, serial, varchar } from 'drizzle-orm/pg-core';
+import { date, decimal, integer, pgTable, uuid, varchar } from 'drizzle-orm/pg-core';
 import { shuttles } from './shuttles';
 
 export const travelRoutes = pgTable('travel_routes', {
-  routeId: serial('route_id').primaryKey(),
-  shuttleId: serial('shuttle_id').references(() => shuttles.shuttleId),
+  routeId: uuid('route_id').primaryKey().defaultRandom(),
+  shuttleId: uuid('shuttle_id').references(() => shuttles.shuttleId),
   departure: varchar('departure', { length: 256 }).notNull(),
   destination: varchar('destination', { length: 256 }).notNull(),
   travelDate: date('travel_date', { mode: 'string' }),

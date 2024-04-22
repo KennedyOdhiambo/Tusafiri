@@ -4,7 +4,7 @@ import { PassengerDetails } from '@/features/booking/PassengerDetails';
 
 export default function Payment() {
   return (
-    <div className="flex min-h-screen flex-col gap-10 p-6 lg:items-center">
+    <div className="flex flex-col gap-10 p-6 lg:items-center">
       <div className="lg:w-[1012px]">
         <NavigationBreadCrumbs path={['booking', 'payment']} />
       </div>

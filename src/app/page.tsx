@@ -7,7 +7,7 @@ import Statisctics from '@/components/Statisctics';
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center gap-5">
+    <main className="flex flex-col items-center gap-5">
       <Image src={heroImage} alt="hero-image" priority height={420} width={1440} className="hero-image mt-5" />
       <div className="flex flex-col gap-10 md:gap-16 lg:gap-20">
         <SearchAvailableTrips />
