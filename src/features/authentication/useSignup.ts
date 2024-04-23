@@ -2,9 +2,9 @@ import signupAction from '@/actions/signupAction';
 import { useToast } from '@/components/ui/use-toast';
 import { consts } from '@/lib/consts';
 import { Newuser } from '@/validation/signupValidation';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
-export default function useSignup() {
+export default function useSignup(setDialogClosed: Dispatch<SetStateAction<boolean>>) {
   const [isLoading, setIsloading] = useState(false);
   const { toast } = useToast();
 
@@ -17,6 +17,7 @@ export default function useSignup() {
       toast({
         description: res.message,
       });
+      setDialogClosed(true);
     } catch (error) {
       if (error instanceof Error) {
         toast({
