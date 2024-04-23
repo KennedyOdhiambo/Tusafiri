@@ -13,7 +13,7 @@ export default function SelectSeat() {
         <CardContent className="flex w-fit flex-col gap-1 pt-3">
           <LifeBuoy className="mb-1 size-8 self-end text-gray-600" />
           {Array.from({ length: 10 }, (_, i) => (
-            <div className="inline-flex justify-between">
+            <div key={i} className="inline-flex justify-between">
               <div className="flex flex-row gap-0.5">
                 <Seat key={''} id={1} status={'available'} onSeatClick={() => console.log('clicked')} />
                 <Seat key={''} id={2} status={'taken'} onSeatClick={() => console.log('clicked')} />
