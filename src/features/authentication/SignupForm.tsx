@@ -4,10 +4,10 @@ import { Input } from '@/components/ui/input';
 import { Newuser, signupSchema } from '@/validation/signupValidation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import useSubmitSignup from './useSubmitSignup';
+import useSignup from './useSignup';
 
 export default function SignupForm() {
-  const { onSubmit, isLoading } = useSubmitSignup();
+  const { onSubmit, isLoading } = useSignup();
   const form = useForm<Newuser>({
     resolver: zodResolver(signupSchema),
   });

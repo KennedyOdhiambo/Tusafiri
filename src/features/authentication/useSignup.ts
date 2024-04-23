@@ -4,7 +4,7 @@ import { consts } from '@/lib/consts';
 import { Newuser } from '@/validation/signupValidation';
 import { useState } from 'react';
 
-export default function useSubmitSignup() {
+export default function useSignup() {
   const [isLoading, setIsloading] = useState(false);
   const { toast } = useToast();
 
@@ -21,6 +21,7 @@ export default function useSubmitSignup() {
       if (error instanceof Error) {
         toast({
           description: error.message,
+          variant: 'destructive',
         });
 
         console.error(error);

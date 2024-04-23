@@ -5,16 +5,11 @@ import { users } from '@/db/schema/users';
 import { consts } from '@/lib/consts';
 import { Newuser } from '@/validation/signupValidation';
 import { eq } from 'drizzle-orm';
+import bcrypt from 'bcrypt';
 
 export default async function signupAction(newUser: Newuser) {
   try {
-    const user = {
-      name: newUser.fullName,
-      phoneNumber: newUser.phoneNumber,
-      password: newUser.password,
-    };
-
-    const existingPhone = await db.select().from(users).where(eq(users.phoneNumber, user.phoneNumber)).execute();
+    const existingPhone = await db.select().from(users).where(eq(users.phoneNumber, newUser.phoneNumber)).execute();
     if (existingPhone.length > 0) {
       return {
         status: consts.httpCodeSeverError,
@@ -22,7 +17,17 @@ export default async function signupAction(newUser: Newuser) {
       };
     }
 
-    const res = await db.insert(users).values(user);
+    const salt = await bcrypt.genSalt();
+    const encryptedPassword = await bcrypt.hash(newUser.password, salt);
+
+    const res = await db.insert(users).values({
+      name: newUser.fullName,
+      password: encryptedPassword,
+      phoneNumber: newUser.phoneNumber,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+
     if (!res.rowCount) {
       return {
         status: consts.httpCodeSeverError,
