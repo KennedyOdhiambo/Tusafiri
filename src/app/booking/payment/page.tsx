@@ -1,5 +1,4 @@
 import NavigationBreadCrumbs from '@/components/NavigationBreadCrumbs';
-import { Card } from '@/components/ui/card';
 import { PassengerDetails } from '@/features/booking/PassengerDetails';
 
 export default function Payment() {

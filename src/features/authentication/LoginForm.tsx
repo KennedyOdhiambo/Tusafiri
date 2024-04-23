@@ -1,29 +1,53 @@
 import { Button } from '@/components/ui/button';
-import { DialogFooter } from '@/components/ui/dialog';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import React from 'react';
+import { Login, loginSchema } from '@/validation/loginValidation';
+import { zodResolver } from '@hookform/resolvers/zod';
+import React, { Dispatch, SetStateAction } from 'react';
+import { useForm } from 'react-hook-form';
+import useLogin from './useLogin';
 
-export default function LoginForm() {
+export default function LoginForm({ setDialogClosed }: { setDialogClosed: Dispatch<SetStateAction<boolean>> }) {
+  const { onSubmit, isLoading } = useLogin({ setDialogClosed });
+  const form = useForm<Login>({
+    resolver: zodResolver(loginSchema),
+  });
+
   return (
-    <>
-      <form action="" className="flex flex-col gap-4">
-        <div className="grid gap-2">
-          <Label htmlFor="phoneNumber">Phone Number</Label>
-          <Input className=" outline-none" id="phoneNumber" type="tel" placeholder="254-727-533-551" required />
-        </div>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
+        <FormField
+          control={form.control}
+          name="phoneNumber"
+          render={() => (
+            <FormItem>
+              <FormLabel>Phone Number</FormLabel>
+              <FormControl>
+                <Input type="tel" {...form.register('phoneNumber')} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-        <div className="grid gap-2">
-          <Label htmlFor="password">Password</Label>
-          <Input id="password" type="password" required />
-        </div>
-      </form>
+        <FormField
+          control={form.control}
+          name="password"
+          render={() => (
+            <FormItem>
+              <FormLabel>Password</FormLabel>
+              <FormControl>
+                <Input type="password" {...form.register('password')} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-      <DialogFooter>
-        <Button className="w-full" type="submit">
-          Sign in
+        <Button disabled={isLoading} type="submit">
+          {isLoading ? 'verifying credentials ...' : 'Login'}
         </Button>
-      </DialogFooter>
-    </>
+      </form>
+    </Form>
   );
 }
