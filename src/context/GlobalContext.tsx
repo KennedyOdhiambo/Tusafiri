@@ -13,14 +13,21 @@ export type GlobalContext = {
 export const GlobalContext = createContext<GlobalContext | null>(null);
 
 export default function GlobalContextProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(() => {
-    const storedUser = localStorage.getItem('user');
-    return storedUser ? JSON.parse(storedUser) : null;
-  });
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
-    const storedState = localStorage.getItem('userState');
-    return storedState ? JSON.parse(storedState) : null;
-  });
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+
+  useEffect(() => {
+    const loadUserState = () => {
+      if (typeof window !== 'undefined') {
+        const storedUser = localStorage.getItem('user');
+        const storedState = localStorage.getItem('userState');
+        setUser(storedUser ? JSON.parse(storedUser) : null);
+        setIsLoggedIn(storedState ? JSON.parse(storedState) : false);
+      }
+    };
+
+    loadUserState();
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('user', JSON.stringify(user));
