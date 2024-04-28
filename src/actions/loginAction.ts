@@ -9,7 +9,7 @@ import bcrypt from 'bcrypt';
 
 export default async function loginAction(credentials: Login) {
   const { password, phoneNumber } = credentials;
-  console.log('credentials:', credentials);
+
   try {
     if (!password || !phoneNumber) {
       return {
@@ -37,6 +37,7 @@ export default async function loginAction(credentials: Login) {
     return {
       status: consts.httpCodeSucceed,
       message: 'Login Succesfull!',
+      user: { userId: user[0].userId, name: user[0].name, contact: user[0].phoneNumber, role: user[0].role },
     };
   } catch (error) {
     console.error('Error in signupAction:', error);

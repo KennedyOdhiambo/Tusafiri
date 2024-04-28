@@ -1,10 +1,8 @@
 'use client';
 import { Mail, Phone } from 'lucide-react';
-import { ModeToggle } from './ui/modeToggle';
-import LoginModal from '@/features/authentication/LoginModal';
-import SignupModal from '@/features/authentication/SignupModal';
 import { Card } from './ui/card';
 import useScrollY from '@/lib/hooks/useScrollY';
+import AuthOptions from '@/features/authentication/AuthOptions';
 
 export default function Header() {
   const isScrolled = useScrollY();
@@ -25,10 +23,7 @@ export default function Header() {
       </div>
 
       <div className="inline-flex w-full items-center justify-end">
-        <LoginModal />
-        <SignupModal />
-
-        <ModeToggle />
+        <AuthOptions />
       </div>
     </Card>
   );
