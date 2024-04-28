@@ -1,11 +1,8 @@
 'use client';
-import { LogOut, Mail, Phone } from 'lucide-react';
-import { ModeToggle } from './ui/modeToggle';
-import LoginModal from '@/features/authentication/LoginModal';
-import SignupModal from '@/features/authentication/SignupModal';
+import { Mail, Phone } from 'lucide-react';
 import { Card } from './ui/card';
 import useScrollY from '@/lib/hooks/useScrollY';
-import { useAuthActions, useLoggedinState, useLoggedinUser } from '@/features/authentication/useAuthStore';
+import AuthOptions from '@/features/authentication/AuthOptions';
 
 export default function Header() {
   const isScrolled = useScrollY();
@@ -29,25 +26,7 @@ export default function Header() {
       </div>
 
       <div className="inline-flex w-full items-center justify-end">
-        {isLoggedin ? (
-          <div className="me-6 flex flex-row items-center gap-2">
-            {/* <LogOut
-              className="cursor-pointer"
-              onClick={() => {
-                reset();
-                window.location.reload();
-              }}
-            /> */}
-            <span>{name}</span>
-          </div>
-        ) : (
-          <>
-            <LoginModal />
-            <SignupModal />
-          </>
-        )}
-
-        <ModeToggle />
+        <AuthOptions />
       </div>
     </Card>
   );

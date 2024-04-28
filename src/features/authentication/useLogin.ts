@@ -1,14 +1,14 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useContext, useState } from 'react';
 import loginAction from '@/actions/loginAction';
 import { useToast } from '@/components/ui/use-toast';
 import { consts } from '@/lib/consts';
 import { Login } from '@/validation/loginValidation';
-import { useAuthActions } from './useAuthStore';
+import { GlobalContext } from '@/context/GlobalContext';
 
 export default function useLogin({ setDialogClosed }: { setDialogClosed: Dispatch<SetStateAction<boolean>> }) {
   const [isLoading, setIsLoading] = useState(false);
+  const globalContext = useContext(GlobalContext);
   const { toast } = useToast();
-  const { updateUser, setIsLoggedin } = useAuthActions();
 
   const onSubmit = async (data: Login) => {
     setIsLoading(true);
@@ -16,8 +16,11 @@ export default function useLogin({ setDialogClosed }: { setDialogClosed: Dispatc
       const res = await loginAction(data);
       if (res.status !== consts.httpCodeSucceed) throw new Error(res.message);
       const user = res.user;
-      updateUser(user!);
-      setIsLoggedin();
+
+      globalContext?.setUser(user!);
+      globalContext?.setIsLoggedIn(true);
+      window.localStorage.setItem('user', JSON.stringify(user));
+      window.localStorage.setItem('isLoggedIn', JSON.stringify(true));
 
       toast({
         description: res.message,
