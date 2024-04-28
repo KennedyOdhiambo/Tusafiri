@@ -4,28 +4,44 @@ import { LogOut } from 'lucide-react';
 import LoginModal from './LoginModal';
 import SignupModal from './SignupModal';
 import { ModeToggle } from '@/components/ui/modeToggle';
-import { useContext } from 'react';
-import { GlobalContext } from '@/context/GlobalContext';
+import { useContext, useEffect, useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
+import { GlobalContext } from '@/context/GlobalContext';
+
+type User = { userId: string; name: string; contact: string; role: 'admin' | 'customer' | null };
 
 export default function AuthOptions() {
-  const { toast } = useToast();
+  const [isLoggedin, setIsloggedin] = useState(false);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
   const globalContext = useContext(GlobalContext);
-  const isLoggedin = globalContext?.isLoggedIn;
-  const user = globalContext?.user;
-  const resetUserState = globalContext?.resetUserState!;
+  const { toast } = useToast();
+
+  useEffect(() => {
+    const loadUserState = () => {
+      const user = localStorage.getItem('user');
+      const logedIn = localStorage.getItem('isLoggedIn');
+
+      setIsloggedin(logedIn ? true : false);
+      setCurrentUser(user ? JSON.parse(user) : null);
+    };
+
+    loadUserState();
+  }, []);
 
   const handleLogout = () => {
-    resetUserState();
+    setIsloggedin(false);
+    setCurrentUser(null);
+    localStorage.clear();
+    globalContext?.resetUserState();
     toast({
       description: 'Account succesfully logged out',
     });
   };
 
-  if (isLoggedin)
+  if (isLoggedin || globalContext?.isLoggedIn)
     return (
       <div className="me-6 flex flex-row items-center gap-2">
-        <span>{user?.name}</span>
+        <span>{currentUser?.name || globalContext?.user?.name}</span>
         <div title="log out" className=" me-5">
           <LogOut className="size-4 cursor-pointer" onClick={handleLogout} />
         </div>

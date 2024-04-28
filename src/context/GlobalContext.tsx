@@ -16,24 +16,6 @@ export default function GlobalContextProvider({ children }: { children: ReactNod
   const [user, setUser] = useState<User | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
-  useEffect(() => {
-    const loadUserState = () => {
-      if (typeof window !== 'undefined') {
-        const storedUser = localStorage.getItem('user');
-        const storedState = localStorage.getItem('userState');
-        setUser(storedUser ? JSON.parse(storedUser) : null);
-        setIsLoggedIn(storedState ? JSON.parse(storedState) : false);
-      }
-    };
-
-    loadUserState();
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('userState', JSON.stringify(isLoggedIn));
-  }, [user, isLoggedIn]);
-
   const resetUserState = () => {
     setUser(null);
     setIsLoggedIn(false);

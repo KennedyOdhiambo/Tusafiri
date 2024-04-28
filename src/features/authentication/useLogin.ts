@@ -16,8 +16,11 @@ export default function useLogin({ setDialogClosed }: { setDialogClosed: Dispatc
       const res = await loginAction(data);
       if (res.status !== consts.httpCodeSucceed) throw new Error(res.message);
       const user = res.user;
+
       globalContext?.setUser(user!);
       globalContext?.setIsLoggedIn(true);
+      window.localStorage.setItem('user', JSON.stringify(user));
+      window.localStorage.setItem('isLoggedIn', JSON.stringify(true));
 
       toast({
         description: res.message,
