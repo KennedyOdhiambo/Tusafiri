@@ -1,3 +1,4 @@
+'use client';
 import DropdownSelect from '@/components/DropdownSelect';
 import { Button } from '@/components/ui/button';
 import { DatePicker } from '@/components/ui/datepicker';
