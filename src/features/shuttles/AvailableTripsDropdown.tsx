@@ -3,6 +3,7 @@
 import DropdownSelect from '@/components/DropdownSelect';
 import { DatePicker } from '@/components/ui/datepicker';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
 type Props = {
   departures: Array<string>;
@@ -48,14 +49,20 @@ export default function AvailableTripsDropdown({ departures, destinations }: Pro
   };
 
   return (
-    <div className="flex w-fit flex-col items-center gap-3 md:grid md:grid-cols-3 md:items-end xl:col-span-3">
-      <DropdownSelect handleSelect={handleDepartureChange} label="Travelling From" options={departureDropdownOptions} />
-      <DropdownSelect
-        handleSelect={handleDestinationChange}
-        label="Travelling To"
-        options={destinationDropdownOptions}
-      />
-      <DatePicker />
-    </div>
+    <Suspense>
+      <div className="flex w-fit flex-col items-center gap-3 md:grid md:grid-cols-3 md:items-end xl:col-span-3">
+        <DropdownSelect
+          handleSelect={handleDepartureChange}
+          label="Travelling From"
+          options={departureDropdownOptions}
+        />
+        <DropdownSelect
+          handleSelect={handleDestinationChange}
+          label="Travelling To"
+          options={destinationDropdownOptions}
+        />
+        <DatePicker />
+      </div>
+    </Suspense>
   );
 }
