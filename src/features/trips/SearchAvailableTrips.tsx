@@ -1,36 +1,18 @@
-'use client';
 import { Card } from '@/components/ui/card';
-import DropdownSelect from '@/components/DropdownSelect';
-import { DatePicker } from '@/components/ui/datepicker';
-import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/navigation';
+import AvailableTripsDropdown from '../shuttles/AvailableTripsDropdown';
+import { db } from '@/db/connect';
+import { travelRoutes } from '@/db/schema/travelRoute';
+import SearchButton from './SearchButton';
 
-const sampleLocations = [
-  { value: '101', text: 'Kisumu' },
-  { value: '102', text: 'Mombasa' },
-  { value: '103', text: 'Nakuru' },
-  { value: '104', text: 'Eldoret' },
-];
-
-export default function SearchAvailableTrips() {
-  const router = useRouter();
-
+export default async function SearchAvailableTrips() {
+  const routes = await db.select().from(travelRoutes);
+  const departures = routes.map((route) => route.departure);
+  const destinations = routes.map((route) => route.destination);
   return (
     <div className="inline-flex w-full justify-center">
       <Card className="flex flex-col gap-2 p-5 shadow-sm xl:grid xl:grid-cols-4">
-        <div className="flex w-fit flex-col items-center gap-3 md:grid md:grid-cols-3 md:items-end xl:col-span-3">
-          <DropdownSelect label="Travelling From" options={sampleLocations} />
-          <DropdownSelect label="Travelling To" options={sampleLocations} />
-          <DatePicker />
-        </div>
-
-        <Button
-          onClick={() => router.push('/booking')}
-          variant={'default'}
-          className="mt-2 w-[240px] self-end xl:w-[180px] xl:justify-self-end"
-        >
-          Find Bus
-        </Button>
+        <AvailableTripsDropdown departures={departures} destinations={destinations} />
+        <SearchButton />
       </Card>
     </div>
   );
