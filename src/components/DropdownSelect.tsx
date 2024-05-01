@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Label } from './ui/label';
 
@@ -10,7 +10,7 @@ type DropdownSelectProps = {
 };
 export default function DropdownSelect({ placeholder, options, label, handleSelect }: DropdownSelectProps) {
   return (
-    <div>
+    <Suspense>
       <Label>{label}</Label>
       <Select onValueChange={handleSelect}>
         <SelectTrigger className=" w-[240px] border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground">
@@ -24,6 +24,6 @@ export default function DropdownSelect({ placeholder, options, label, handleSele
           ))}
         </SelectContent>
       </Select>
-    </div>
+    </Suspense>
   );
 }
