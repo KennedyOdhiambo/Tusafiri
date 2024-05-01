@@ -6,12 +6,13 @@ type DropdownSelectProps = {
   placeholder?: string;
   options: Array<{ value: string; text: string }>;
   label?: string;
+  handleSelect: (value: string) => void;
 };
-export default function DropdownSelect({ placeholder, options, label }: DropdownSelectProps) {
+export default function DropdownSelect({ placeholder, options, label, handleSelect }: DropdownSelectProps) {
   return (
     <div>
       <Label>{label}</Label>
-      <Select>
+      <Select onValueChange={handleSelect}>
         <SelectTrigger className=" w-[240px] border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground">
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>

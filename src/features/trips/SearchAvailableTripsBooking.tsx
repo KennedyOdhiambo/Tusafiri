@@ -1,3 +1,4 @@
+'use client';
 import DropdownSelect from '@/components/DropdownSelect';
 import { Button } from '@/components/ui/button';
 import { DatePicker } from '@/components/ui/datepicker';
@@ -14,11 +15,15 @@ export default function SearchAvailableTripsBooking() {
   return (
     <div className="hidden lg:flex lg:flex-row lg:items-end lg:justify-center lg:gap-5">
       <div className="flex flex-row items-end  gap-8">
-        <DropdownSelect label="Travelling From" options={sampleLocations} />
+        <DropdownSelect
+          handleSelect={() => console.log('selected')}
+          label="Travelling From"
+          options={sampleLocations}
+        />
         <div className=" inline-flex items-center rounded-full bg-card p-2  text-card-foreground ">
           <ArrowLeftRight />
         </div>
-        <DropdownSelect label="Travelling To" options={sampleLocations} />
+        <DropdownSelect handleSelect={() => console.log('selected')} label="Travelling To" options={sampleLocations} />
       </div>
 
       <DatePicker />
