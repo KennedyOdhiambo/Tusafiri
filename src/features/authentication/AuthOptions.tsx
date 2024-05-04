@@ -6,14 +6,14 @@ import SignupModal from './SignupModal';
 import { ModeToggle } from '@/components/ui/modeToggle';
 import { useContext, useEffect, useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
-import { GlobalContext } from '@/context/GlobalContext';
+import { AuthContext } from '@/context/AuthContext';
 
 type User = { userId: string; name: string; contact: string; role: 'admin' | 'customer' | null };
 
 export default function AuthOptions() {
   const [isLoggedin, setIsloggedin] = useState(false);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
-  const globalContext = useContext(GlobalContext);
+  const authContext = useContext(AuthContext);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -32,16 +32,18 @@ export default function AuthOptions() {
     setIsloggedin(false);
     setCurrentUser(null);
     localStorage.clear();
-    globalContext?.resetUserState();
+    authContext?.resetUserState();
     toast({
       description: 'Account succesfully logged out',
     });
   };
 
-  if (isLoggedin || globalContext?.isLoggedIn)
+  console.log(isLoggedin);
+  console.log('authContext', authContext?.isLoggedIn);
+  if (isLoggedin || authContext?.isLoggedIn)
     return (
       <div className="me-6 flex flex-row items-center gap-2">
-        <span>{currentUser?.name || globalContext?.user?.name}</span>
+        <span>{currentUser?.name || authContext?.user?.name}</span>
         <div title="log out" className=" me-5">
           <LogOut className="size-4 cursor-pointer" onClick={handleLogout} />
         </div>

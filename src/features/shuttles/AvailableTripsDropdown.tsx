@@ -2,7 +2,9 @@
 
 import DropdownSelect from '@/components/DropdownSelect';
 import { DatePicker } from '@/components/ui/datepicker';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { GlobalContext } from '@/context/GlobalContext';
+import { useSearchParams } from 'next/navigation';
+import { useContext } from 'react';
 
 type Props = {
   departures: Array<string>;
@@ -10,9 +12,7 @@ type Props = {
 };
 
 export default function AvailableTripsDropdown({ departures, destinations }: Props) {
-  const searchParams = useSearchParams();
-  const pathName = usePathname();
-  const router = useRouter();
+  const globalContext = useContext(GlobalContext);
 
   const uniqueDepartures = Array.from(new Set(departures));
   const departureDropdownOptions = uniqueDepartures.map((departure) => ({
@@ -26,25 +26,12 @@ export default function AvailableTripsDropdown({ departures, destinations }: Pro
     text: destination,
   }));
 
-  const params = new URLSearchParams(searchParams.toString());
   const handleDepartureChange = (departure: string) => {
-    if (departure) {
-      params.set('departure', departure);
-    } else {
-      params.delete('departure');
-    }
-
-    router.push(pathName + '?' + params.toString());
+    globalContext?.setDeparture(departure);
   };
 
   const handleDestinationChange = (destination: string) => {
-    if (destination) {
-      params.set('destination', destination);
-    } else {
-      params.delete('destination');
-    }
-
-    router.push(`${pathName}?${params.toString()}`);
+    globalContext?.setDestination(destination);
   };
 
   return (
