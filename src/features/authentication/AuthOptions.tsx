@@ -38,8 +38,6 @@ export default function AuthOptions() {
     });
   };
 
-  console.log(isLoggedin);
-  console.log('authContext', authContext?.isLoggedIn);
   if (isLoggedin || authContext?.isLoggedIn)
     return (
       <div className="me-6 flex flex-row items-center gap-2">

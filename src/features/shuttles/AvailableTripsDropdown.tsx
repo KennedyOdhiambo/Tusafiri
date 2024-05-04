@@ -1,9 +1,7 @@
 'use client';
-
 import DropdownSelect from '@/components/DropdownSelect';
 import { DatePicker } from '@/components/ui/datepicker';
-import { GlobalContext } from '@/context/GlobalContext';
-import { useSearchParams } from 'next/navigation';
+import { TripsContext } from '@/context/TripsContext';
 import { useContext } from 'react';
 
 type Props = {
@@ -12,7 +10,7 @@ type Props = {
 };
 
 export default function AvailableTripsDropdown({ departures, destinations }: Props) {
-  const globalContext = useContext(GlobalContext);
+  const tripsContext = useContext(TripsContext);
 
   const uniqueDepartures = Array.from(new Set(departures));
   const departureDropdownOptions = uniqueDepartures.map((departure) => ({
@@ -27,11 +25,11 @@ export default function AvailableTripsDropdown({ departures, destinations }: Pro
   }));
 
   const handleDepartureChange = (departure: string) => {
-    globalContext?.setDeparture(departure);
+    tripsContext?.setDeparture(departure);
   };
 
   const handleDestinationChange = (destination: string) => {
-    globalContext?.setDestination(destination);
+    tripsContext?.setDestination(destination);
   };
 
   return (

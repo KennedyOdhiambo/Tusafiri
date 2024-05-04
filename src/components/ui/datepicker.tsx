@@ -1,16 +1,24 @@
 'use client';
 
-import * as React from 'react';
+import { useContext, useState } from 'react';
 import { CalendarIcon } from '@radix-ui/react-icons';
 import { format } from 'date-fns';
 
+import { TripsContext } from '@/context/TripsContext';
 import { cn } from '@/lib/utils';
+
 import { Popover, PopoverContent, PopoverTrigger } from './popover';
 import { Button } from './button';
 import { Calendar } from './calendar';
 
 export function DatePicker() {
-  const [date, setDate] = React.useState<Date>();
+  const [date, setDate] = useState<Date>();
+  const tripsContext = useContext(TripsContext);
+
+  const handleSelect = (selectedDate: Date | undefined) => {
+    tripsContext?.setTravelDate(selectedDate);
+    setDate(selectedDate);
+  };
 
   return (
     <div className=" mt-2.5">
@@ -25,7 +33,7 @@ export function DatePicker() {
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0" align="start">
-          <Calendar mode="single" selected={date} onSelect={setDate} initialFocus />
+          <Calendar mode="single" selected={date} onSelect={handleSelect} initialFocus />
         </PopoverContent>
       </Popover>
     </div>
