@@ -1,12 +1,11 @@
-'use client';
-import { ReactNode, createContext } from 'react';
+import { ReactNode, createContext } from 'react'
 
-export type GlobalContext = {};
+export type GlobalContext = {}
 
-export const GlobalContext = createContext<GlobalContext | null>(null);
+export const GlobalContext = createContext<GlobalContext | null>(null)
 
 export default function GlobalContextProvider({ children }: { children: ReactNode }) {
-  const values = {};
+  const values = {}
 
-  return <GlobalContext.Provider value={values}>{children}</GlobalContext.Provider>;
+  return <GlobalContext.Provider value={values}>{children}</GlobalContext.Provider>
 }
