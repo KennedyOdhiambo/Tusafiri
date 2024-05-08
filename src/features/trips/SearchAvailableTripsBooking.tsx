@@ -28,13 +28,20 @@ export default function SearchAvailableTripsBooking({ departure, destinations }:
     value: destination,
     text: destination,
   }))
+
+  const handleDepartureChange = (departure: string) => {
+    tripsContext?.setDeparture(departure)
+  }
+  const handleDestinationChange = (destination: string) => {
+    tripsContext?.setDestination(destination)
+  }
   return (
     <div className="hidden lg:flex lg:flex-row lg:items-end lg:justify-center lg:gap-5">
       <div className="flex flex-row items-end  gap-8">
         <DropdownSelect
           placeholder={selectedDeparture}
           options={departureDropdownOptions}
-          handleSelect={() => console.log('selected')}
+          handleSelect={handleDepartureChange}
           label="Travelling From"
         />
         <div className=" inline-flex items-center rounded-full bg-card p-2  text-card-foreground ">
@@ -43,7 +50,7 @@ export default function SearchAvailableTripsBooking({ departure, destinations }:
         <DropdownSelect
           placeholder={selectedDestination}
           options={destinationDropdownOptions}
-          handleSelect={() => console.log('selected')}
+          handleSelect={handleDestinationChange}
           label="Travelling To"
         />
       </div>

@@ -1,11 +1,7 @@
 import NavigationBreadCrumbs from '@/components/NavigationBreadCrumbs'
 import { db } from '@/db/connect'
 import { travelRoutes } from '@/db/schema/travelRoute'
-import BusOperators from '@/features/shuttles/BusOperators'
-import BusTypes from '@/features/shuttles/BusTypes'
-import Facilities from '@/features/shuttles/Facilities'
-
-import AvailableTrips from '@/features/trips/AvailableTrips'
+import BookingsBody from '@/features/booking/BookingsBody'
 import SearchAvailableTripsBooking from '@/features/trips/SearchAvailableTripsBooking'
 
 export default async function Booking() {
@@ -18,15 +14,7 @@ export default async function Booking() {
         <NavigationBreadCrumbs path={['booking']} />
       </div>
       <SearchAvailableTripsBooking departure={departures} destinations={destinations} />
-      <div className="flex flex-row gap-20 lg:mt-8 lg:w-[1010px]">
-        <div className="hidden lg:flex lg:flex-col">
-          <BusTypes />
-          <Facilities />
-          <BusOperators />
-        </div>
-
-        <AvailableTrips />
-      </div>
+      <BookingsBody />
     </div>
   )
 }
