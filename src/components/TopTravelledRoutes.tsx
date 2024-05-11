@@ -1,9 +1,11 @@
-import nairobi from '../../public/nairobi.webp';
-import kisumu from '../../public/kisumu.webp';
-import nakuru from '../../public/nakuru.webp';
-import mombasa from '../../public/mombasa.webp';
-import eldoret from '../../public/eldoret.webp';
-import TravelRouteCard from './TravelRouteCard';
+'use client'
+
+import nairobi from '../../public/nairobi.webp'
+import kisumu from '../../public/kisumu.webp'
+import nakuru from '../../public/nakuru.webp'
+import mombasa from '../../public/mombasa.webp'
+import eldoret from '../../public/eldoret.webp'
+import TravelRouteCard from './TravelRouteCard'
 
 export default function TopTravelledRoutes() {
   return (
@@ -20,5 +22,5 @@ export default function TopTravelledRoutes() {
         <TravelRouteCard from="Nairobi" to="Nakuru" src={nakuru} />
       </div>
     </div>
-  );
+  )
 }

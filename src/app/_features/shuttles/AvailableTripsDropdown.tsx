@@ -1,10 +1,11 @@
 'use client'
 import DropdownSelect from '@/components/DropdownSelect'
 import { DatePicker } from '@/components/ui/datepicker'
-import { TripsContext } from '@/context/TripsContext'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
+import useQueryString from '@/lib/hooks/useQueryString'
+import { formatDate } from '@/lib/utils'
 
 type Props = {
   departures: Array<string>
@@ -16,8 +17,8 @@ export default function AvailableTripsDropdown({ departures, destinations }: Pro
   const [selectedDestination, setSelectedDstination] = useState<string>()
   const [selectedDate, setselectedDate] = useState<Date>()
 
-  const tripsContext = useContext(TripsContext)
-  const navigate = useRouter()
+  const router = useRouter()
+  const createQueryString = useQueryString()
 
   const uniqueDepartures = Array.from(new Set(departures))
   const departureDropdownOptions = uniqueDepartures.map((departure) => ({
@@ -40,10 +41,11 @@ export default function AvailableTripsDropdown({ departures, destinations }: Pro
   }
 
   const handleSubmit = () => {
-    tripsContext?.setDeparture(selectedDeparture ?? '')
-    tripsContext?.setDestination(selectedDestination ?? '')
-    tripsContext?.setTravelDate(selectedDate)
-    navigate.push('/booking')
+    const departureQuery = createQueryString('from', selectedDeparture!)
+    const destinationQuery = createQueryString('to', selectedDestination!)
+    const dateQuery = createQueryString('date', formatDate(selectedDate!))
+
+    router.push(`/booking?${departureQuery}&${destinationQuery}&${dateQuery}`)
   }
 
   return (
