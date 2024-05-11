@@ -2,9 +2,10 @@
 import DropdownSelect from '@/components/DropdownSelect'
 import { Button } from '@/components/ui/button'
 import { DatePicker } from '@/components/ui/datepicker'
-import { TripsContext } from '@/context/TripsContext'
+import { formatDate } from '@/lib/utils'
 import { ArrowLeftRight, Search } from 'lucide-react'
-import { useContext, useState } from 'react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useState } from 'react'
 
 type Props = {
   departure: Array<string>
@@ -12,14 +13,13 @@ type Props = {
 }
 
 export default function SearchAvailableTripsBooking({ departure, destinations }: Props) {
-  const tripsContext = useContext(TripsContext)
-  const selectedDeparture = tripsContext?.departure
-  const selectedDestination = tripsContext?.destination
-  const selectedDate = tripsContext?.travelDate
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const pathName = usePathname()
 
-  const [updatedDeparture, updateDeparture] = useState(selectedDeparture)
-  const [updatedDestination, updateDestination] = useState(selectedDestination)
-  const [updatedDate, updateDate] = useState<Date | undefined>(selectedDate)
+  const [updatedDeparture, updateDeparture] = useState(searchParams.get('from'))
+  const [updatedDestination, updateDestination] = useState(searchParams.get('to'))
+  const [updatedDate, updateDate] = useState<Date | undefined>(new Date(searchParams.get('date') ?? ''))
 
   const uniqueDepartures = Array.from(new Set(departure))
   const departureDropdownOptions = uniqueDepartures.map((departure) => ({
@@ -44,16 +44,19 @@ export default function SearchAvailableTripsBooking({ departure, destinations }:
   }
 
   const handleDeparture = () => {
-    tripsContext?.setDeparture(updatedDeparture ?? '')
-    tripsContext?.setDestination(updatedDestination ?? '')
-    tripsContext?.setTravelDate(updatedDate)
-    console.log('handleDeparture')
+    const current = new URLSearchParams(Array.from(searchParams.entries()))
+    current.set('from', updatedDeparture!)
+    current.set('to', updatedDestination!)
+    current.set('date', formatDate(updatedDate!))
+    const search = current.toString()
+    const query = search ? `${search}` : ''
+    router.push(`${pathName}?${query}`)
   }
   return (
     <div className="hidden lg:flex lg:flex-row lg:items-end lg:justify-center lg:gap-5">
       <div className="flex flex-row items-end  gap-8">
         <DropdownSelect
-          placeholder={selectedDeparture}
+          placeholder={updatedDeparture ?? ''}
           options={departureDropdownOptions}
           handleSelect={handleDepartureChange}
           label="Travelling From"
@@ -62,14 +65,14 @@ export default function SearchAvailableTripsBooking({ departure, destinations }:
           <ArrowLeftRight />
         </div>
         <DropdownSelect
-          placeholder={selectedDestination}
+          placeholder={updatedDestination ?? ''}
           options={destinationDropdownOptions}
           handleSelect={handleDestinationChange}
           label="Travelling To"
         />
       </div>
 
-      <DatePicker initialDate={selectedDate} handleDateChange={handleDateChange} />
+      <DatePicker initialDate={updatedDate} handleDateChange={handleDateChange} />
       <Button variant={'default'} size={'lg'} className=" inline-flex gap-4" onClick={handleDeparture}>
         <Search className=" size-4" />
         Find Bus

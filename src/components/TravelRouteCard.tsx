@@ -1,19 +1,28 @@
-'use client';
+'use client'
 
-import { MoveRight } from 'lucide-react';
-import Image, { StaticImageData } from 'next/image';
-import { useState } from 'react';
+import useQueryString from '@/lib/hooks/useQueryString'
+import { MoveRight } from 'lucide-react'
+import Image, { StaticImageData } from 'next/image'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 
 type TravelRouteCardProps = {
-  src: StaticImageData;
-  from: string;
-  to: string;
-};
+  src: StaticImageData
+  from: string
+  to: string
+}
 
 export default function TravelRouteCard({ src, from, to }: TravelRouteCardProps) {
-  const [cardActive, setCardActive] = useState(false);
+  const [cardActive, setCardActive] = useState(false)
+  const router = useRouter()
+  const createQueryString = useQueryString()
+
+  const handleClick = () => {
+    router.push(`/booking?${createQueryString('from', from)}&${createQueryString('to', to)}`)
+  }
   return (
     <div
+      onClick={handleClick}
       className="relative transition-transform duration-300 hover:scale-105"
       onMouseEnter={() => setCardActive(true)}
       onMouseLeave={() => setCardActive(false)}
@@ -37,5 +46,5 @@ export default function TravelRouteCard({ src, from, to }: TravelRouteCardProps)
         <span>{to}</span>
       </div>
     </div>
-  );
+  )
 }

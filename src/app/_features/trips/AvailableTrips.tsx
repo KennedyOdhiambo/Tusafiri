@@ -1,19 +1,16 @@
 'use client'
 
-import { useContext } from 'react'
 import AvailableTripCard from './AvailableTripCard'
-import { formatDate } from '@/lib/utils'
-import { TripsContext } from '@/context/TripsContext'
 import { api } from '@/trpc/react'
 import CardSkeleton from '@/components/CardSkeleton'
+import { useSearchParams } from 'next/navigation'
 
 export default function AvailableTrips() {
-  const tripsContext = useContext(TripsContext)
-  const travelDate = formatDate(tripsContext?.travelDate ?? new Date())
+  const searchParams = useSearchParams()
   const filterParams = {
-    departure: tripsContext?.departure ?? '',
-    destination: tripsContext?.destination ?? '',
-    travelDate: travelDate,
+    departure: searchParams.get('from') ?? '',
+    destination: searchParams.get('to') ?? '',
+    travelDate: searchParams.get('date') ?? '',
   }
 
   const { data: availableTrips, isPending } = api.trip.availableTrips.useQuery(filterParams)
