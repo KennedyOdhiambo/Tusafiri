@@ -1,10 +1,8 @@
 import { Poppins } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
-import ThemeProvider from '@/components/ThemeProvider'
 import Footer from '@/components/Footer'
 import { Toaster } from '@/components/ui/toaster'
-import GlobalContextProvider from '@/context/GlobalContext'
 import Providers from '@/context/Providers'
 
 const poppins = Poppins({
