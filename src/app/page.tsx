@@ -1,9 +1,9 @@
-import Image from 'next/image';
-import heroImage from '../../public/heroImage.svg';
-import SearchAvailableTrips from '@/features/trips/SearchAvailableTrips';
-import WhyChooseUs from '@/components/WhyChooseUs';
-import TopTravelledRoutes from '@/components/TopTravelledRoutes';
-import Statisctics from '@/components/Statisctics';
+import Image from 'next/image'
+import heroImage from '../../public/heroImage.svg'
+import SearchAvailableTrips from '@/app/_features/trips/SearchAvailableTrips'
+import WhyChooseUs from '@/components/WhyChooseUs'
+import TopTravelledRoutes from '@/components/TopTravelledRoutes'
+import Statisctics from '@/components/Statisctics'
 
 export default function Home() {
   return (
@@ -18,5 +18,5 @@ export default function Home() {
         </div>
       </div>
     </main>
-  );
+  )
 }

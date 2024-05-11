@@ -4,24 +4,21 @@ import { useContext, useEffect, useState } from 'react'
 import AvailableTripCard from './AvailableTripCard'
 import { formatDate } from '@/lib/utils'
 import { TripsContext } from '@/context/TripsContext'
+import { api } from '@/trpc/react'
 
 export default function AvailableTrips() {
-  const [availableTrips, setAvailableTrips] = useState([])
-
   const tripsContext = useContext(TripsContext)
   const departure = tripsContext?.departure
   const destination = tripsContext?.destination
   const travelDate = formatDate(tripsContext?.travelDate ?? new Date())
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch(`/api/trips?departure=${departure}&destination=${destination}&travelDate=${travelDate}`)
-      const data = await res.json()
-      setAvailableTrips(data.availableTrips)
-    }
+  const { data: availableTrips } = api.trip.availableTrips.useQuery({
+    departure: 'Nairobi',
+    destination: 'Kisumu',
+    travelDate: '2024-05-01',
+  })
 
-    fetchData()
-  }, [departure, destination, travelDate])
+  console.log(availableTrips)
 
   return (
     <div className="flex w-full flex-col items-center gap-8">

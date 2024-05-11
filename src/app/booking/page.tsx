@@ -1,8 +1,8 @@
 import NavigationBreadCrumbs from '@/components/NavigationBreadCrumbs'
 import { db } from '@/db/connect'
 import { travelRoutes } from '@/db/schema/travelRoute'
-import BookingsBody from '@/features/booking/BookingsBody'
-import SearchAvailableTripsBooking from '@/features/trips/SearchAvailableTripsBooking'
+import BookingsBody from '@/app/_features/booking/BookingsBody'
+import SearchAvailableTripsBooking from '@/app/_features/trips/SearchAvailableTripsBooking'
 
 export default async function Booking() {
   const routes = await db.select().from(travelRoutes)

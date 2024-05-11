@@ -2,7 +2,7 @@
 import { Mail, Phone } from 'lucide-react'
 import { Card } from './ui/card'
 import useScrollY from '@/lib/hooks/useScrollY'
-import AuthOptions from '@/features/authentication/AuthOptions'
+import AuthOptions from '@/app/_features/authentication/AuthOptions'
 
 export default function Header() {
   const isScrolled = useScrollY()
