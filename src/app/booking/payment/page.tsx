@@ -1,5 +1,5 @@
-import NavigationBreadCrumbs from '@/components/NavigationBreadCrumbs';
-import { PassengerDetails } from '@/features/booking/PassengerDetails';
+import NavigationBreadCrumbs from '@/components/NavigationBreadCrumbs'
+import { PassengerDetails } from '@/app/_features/booking/PassengerDetails'
 
 export default function Payment() {
   return (
@@ -12,5 +12,5 @@ export default function Payment() {
         <PassengerDetails />
       </div>
     </div>
-  );
+  )
 }
