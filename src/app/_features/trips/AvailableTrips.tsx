@@ -8,23 +8,27 @@ import { api } from '@/trpc/react'
 
 export default function AvailableTrips() {
   const tripsContext = useContext(TripsContext)
-  const departure = tripsContext?.departure
-  const destination = tripsContext?.destination
+
   const travelDate = formatDate(tripsContext?.travelDate ?? new Date())
+  const filterParams = {
+    departure: tripsContext?.departure ?? '',
+    destination: tripsContext?.destination ?? '',
+    travelDate: travelDate,
+  }
 
-  const { data: availableTrips } = api.trip.availableTrips.useQuery({
-    departure: 'Nairobi',
-    destination: 'Kisumu',
-    travelDate: '2024-05-01',
-  })
-
-  console.log(availableTrips)
+  const { data: availableTrips } = api.trip.availableTrips.useQuery(filterParams)
 
   return (
     <div className="flex w-full flex-col items-center gap-8">
-      {/* {availableTrips.map((trip) => (
-        <AvailableTripCard departure={trip.} />
-      ))} */}
+      {availableTrips?.map((trip) => (
+        <AvailableTripCard
+          departure={trip.departure}
+          destination={trip.destination}
+          seats={trip.availableSeats ?? 0}
+          ticketPrice={trip.ticketPrice ?? ''}
+          key={trip.routeId}
+        />
+      ))}
     </div>
   )
 }

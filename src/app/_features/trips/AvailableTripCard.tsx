@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card'
 
-import bus from '../../../public/bus-inbound-alt-svgrepo-com.svg'
+import bus from '../../../../public/bus-inbound-alt-svgrepo-com.svg'
 import Image from 'next/image'
 import BookingDrawer from '../booking/BookingDrawer'
 
