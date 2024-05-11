@@ -12,8 +12,8 @@ type Props = {
 }
 
 export default function AvailableTripsDropdown({ departures, destinations }: Props) {
-  const [selectedDeparture, setSelectedDeparture] = useState('')
-  const [selectedDestination, setSelectedDstination] = useState('')
+  const [selectedDeparture, setSelectedDeparture] = useState<string>()
+  const [selectedDestination, setSelectedDstination] = useState<string>()
   const [selectedDate, setselectedDate] = useState<Date>()
 
   const tripsContext = useContext(TripsContext)
@@ -40,8 +40,8 @@ export default function AvailableTripsDropdown({ departures, destinations }: Pro
   }
 
   const handleSubmit = () => {
-    tripsContext?.setDeparture(selectedDeparture)
-    tripsContext?.setDestination(selectedDestination)
+    tripsContext?.setDeparture(selectedDeparture ?? '')
+    tripsContext?.setDestination(selectedDestination ?? '')
     tripsContext?.setTravelDate(selectedDate)
     navigate.push('/booking')
   }
@@ -65,7 +65,7 @@ export default function AvailableTripsDropdown({ departures, destinations }: Pro
         <Button
           variant={'default'}
           disabled={!selectedDeparture && !selectedDestination && !selectedDate}
-          className="w-full"
+          className="w-full disabled:cursor-not-allowed"
           onClick={handleSubmit}
         >
           Find Bus
