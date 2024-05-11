@@ -1,3 +1,4 @@
+import { shuttles } from '@/db/schema/shuttles'
 import { travelRoutes } from '@/db/schema/travelRoute'
 import { createTRPCRouter, publicProcedure } from '@/server/trpc'
 import { and, eq } from 'drizzle-orm'
@@ -14,7 +15,7 @@ export const tripRouter = createTRPCRouter({
     )
     .query(async ({ ctx, input }) => {
       const { departure, destination, travelDate } = input
-      const availableTrips = await ctx.db
+      const data = await ctx.db
         .select()
         .from(travelRoutes)
         .where(
@@ -24,7 +25,8 @@ export const tripRouter = createTRPCRouter({
             eq(travelRoutes.travelDate, travelDate),
           ),
         )
+        .leftJoin(shuttles, eq(travelRoutes.shuttleId, shuttles.shuttleId))
 
-      return availableTrips
+      return data
     }),
 })

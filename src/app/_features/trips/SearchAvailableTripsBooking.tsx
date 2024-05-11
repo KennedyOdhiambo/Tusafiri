@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { DatePicker } from '@/components/ui/datepicker'
 import { TripsContext } from '@/context/TripsContext'
 import { ArrowLeftRight, Search } from 'lucide-react'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 
 type Props = {
   departure: Array<string>
@@ -16,6 +16,10 @@ export default function SearchAvailableTripsBooking({ departure, destinations }:
   const selectedDeparture = tripsContext?.departure
   const selectedDestination = tripsContext?.destination
   const selectedDate = tripsContext?.travelDate
+
+  const [updatedDeparture, updateDeparture] = useState(selectedDeparture)
+  const [updatedDestination, updateDestination] = useState(selectedDestination)
+  const [updatedDate, updateDate] = useState<Date | undefined>(selectedDate)
 
   const uniqueDepartures = Array.from(new Set(departure))
   const departureDropdownOptions = uniqueDepartures.map((departure) => ({
@@ -30,10 +34,20 @@ export default function SearchAvailableTripsBooking({ departure, destinations }:
   }))
 
   const handleDepartureChange = (departure: string) => {
-    tripsContext?.setDeparture(departure)
+    updateDeparture(departure)
   }
   const handleDestinationChange = (destination: string) => {
-    tripsContext?.setDestination(destination)
+    updateDestination(destination)
+  }
+  const handleDateChange = (date: Date | undefined) => {
+    updateDate(date)
+  }
+
+  const handleDeparture = () => {
+    tripsContext?.setDeparture(updatedDeparture ?? '')
+    tripsContext?.setDestination(updatedDestination ?? '')
+    tripsContext?.setTravelDate(updatedDate)
+    console.log('handleDeparture')
   }
   return (
     <div className="hidden lg:flex lg:flex-row lg:items-end lg:justify-center lg:gap-5">
@@ -55,8 +69,8 @@ export default function SearchAvailableTripsBooking({ departure, destinations }:
         />
       </div>
 
-      <DatePicker initialDate={selectedDate} />
-      <Button variant={'default'} size={'lg'} className=" inline-flex gap-4">
+      <DatePicker initialDate={selectedDate} handleDateChange={handleDateChange} />
+      <Button variant={'default'} size={'lg'} className=" inline-flex gap-4" onClick={handleDeparture}>
         <Search className=" size-4" />
         Find Bus
       </Button>

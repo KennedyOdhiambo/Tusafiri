@@ -9,9 +9,10 @@ type Props = {
   destination: string
   seats: number
   ticketPrice: string
+  company: string
 }
 
-export default function AvailableTripCard({ departure, destination, seats, ticketPrice }: Props) {
+export default function AvailableTripCard({ departure, destination, seats, ticketPrice, company }: Props) {
   return (
     <Card className=" h-fit w-full shadow xl:max-w-2xl">
       <CardHeader className="flex w-full flex-row items-center justify-between">
@@ -22,7 +23,7 @@ export default function AvailableTripCard({ departure, destination, seats, ticke
         </CardDescription>
 
         <div className="flex flex-col items-center gap-0.5">
-          <CardDescription>Easy Coach Travellers</CardDescription>
+          <CardDescription>{company}</CardDescription>
           <Image src={bus} alt="bus" className=" w-10" />
         </div>
 

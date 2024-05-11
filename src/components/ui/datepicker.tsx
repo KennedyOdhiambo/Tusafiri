@@ -1,22 +1,24 @@
 'use client'
 
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { CalendarIcon } from '@radix-ui/react-icons'
 import { format } from 'date-fns'
 
-import { TripsContext } from '@/context/TripsContext'
 import { cn } from '@/lib/utils'
 
 import { Popover, PopoverContent, PopoverTrigger } from './popover'
 import { Button } from './button'
 import { Calendar } from './calendar'
 
-export function DatePicker({ initialDate }: { initialDate?: Date }) {
+type DatePickerProps = {
+  initialDate?: Date
+  handleDateChange: (date: Date | undefined) => void
+}
+export function DatePicker({ initialDate, handleDateChange }: DatePickerProps) {
   const [date, setDate] = useState<Date | undefined>(initialDate)
-  const tripsContext = useContext(TripsContext)
 
   const handleSelect = (selectedDate: Date | undefined) => {
-    tripsContext?.setTravelDate(selectedDate)
+    handleDateChange(selectedDate)
     setDate(selectedDate)
   }
 
