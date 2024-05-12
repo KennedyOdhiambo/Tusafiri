@@ -1,8 +1,8 @@
-import { Button } from '@/components/ui/button';
-import { Drawer, DrawerContent, DrawerFooter, DrawerHeader, DrawerTrigger } from '@/components/ui/drawer';
-import SelectSeat from './SelectSeat';
+import { Button } from '@/components/ui/button'
+import { Drawer, DrawerContent, DrawerFooter, DrawerHeader, DrawerTrigger } from '@/components/ui/drawer'
+import SelectSeat from './SelectSeat'
 
-export default function BookingDrawer() {
+export default function BookingDrawer({ ticketPrice }: { ticketPrice: string }) {
   return (
     <Drawer>
       <DrawerTrigger asChild>
@@ -11,9 +11,9 @@ export default function BookingDrawer() {
 
       <DrawerContent className="flex w-full items-center">
         <DrawerHeader className="font-bold">Select a Seat</DrawerHeader>
-        <SelectSeat />
+        <SelectSeat ticketPrice={ticketPrice} />
         <DrawerFooter></DrawerFooter>
       </DrawerContent>
     </Drawer>
-  );
+  )
 }

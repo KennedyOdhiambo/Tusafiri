@@ -15,7 +15,7 @@ type DatePickerProps = {
   handleDateChange: (date: Date | undefined) => void
 }
 export function DatePicker({ initialDate, handleDateChange }: DatePickerProps) {
-  const [date, setDate] = useState<Date | undefined>(initialDate)
+  const [date, setDate] = useState<Date | undefined>(initialDate ? initialDate : new Date())
 
   const handleSelect = (selectedDate: Date | undefined) => {
     handleDateChange(selectedDate)
@@ -31,7 +31,7 @@ export function DatePicker({ initialDate, handleDateChange }: DatePickerProps) {
             className={cn('w-[240px] justify-start text-left font-normal', !date && 'text-muted-foreground')}
           >
             <CalendarIcon className="mr-2 h-4 w-4" />
-            {date ? format(date ?? '', 'PPP') : <span>Travelling Date</span>}
+            {date ? format(date, 'PPP') : <span>Travelling Date</span>}
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0" align="start">

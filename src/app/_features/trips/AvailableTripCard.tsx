@@ -45,7 +45,7 @@ export default function AvailableTripCard({ departure, destination, seats, ticke
           </CardDescription>
         </div>
 
-        <BookingDrawer />
+        <BookingDrawer ticketPrice={ticketPrice} />
       </CardContent>
     </Card>
   )

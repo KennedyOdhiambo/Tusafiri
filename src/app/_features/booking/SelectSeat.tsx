@@ -6,8 +6,9 @@ import { Card, CardContent } from '@/components/ui/card'
 import Seatslegend from './Seatslegend'
 import SelectSeatActions from './SelectSeatActions'
 
-export default function SelectSeat() {
+export default function SelectSeat({ ticketPrice }: { ticketPrice: string }) {
   const [selectedSeats, setSelectedSeats] = useState<Array<string>>([])
+
   let selected = []
   const handleSelectedSeat = (seatId: string) => {
     const indexOfSelectedSeat = selectedSeats.findIndex((seat) => seat === seatId)
@@ -48,7 +49,7 @@ export default function SelectSeat() {
 
       <div className="flex flex-col justify-between">
         <Seatslegend />
-        <SelectSeatActions />
+        <SelectSeatActions selectedSeats={selectedSeats} ticketPrice={ticketPrice} />
       </div>
     </div>
   )
