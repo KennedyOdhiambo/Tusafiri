@@ -53,15 +53,15 @@ export default function SearchAvailableTripsBooking({ departure, destinations }:
     router.push(`${pathName}?${query}`)
   }
   return (
-    <div className="hidden lg:flex lg:flex-row lg:items-end lg:justify-center lg:gap-5">
-      <div className="flex flex-row items-end  gap-8">
+    <div className="flex flex-col items-center gap-5 md:flex-row md:items-end md:justify-center">
+      <div className="flex flex-col items-center gap-8 md:flex-row lg:items-end">
         <DropdownSelect
           placeholder={updatedDeparture ?? ''}
           options={departureDropdownOptions}
           handleSelect={handleDepartureChange}
           label="Travelling From"
         />
-        <div className=" inline-flex items-center rounded-full bg-card p-2  text-card-foreground ">
+        <div className="hidden items-center rounded-full bg-card p-2 text-card-foreground  lg:inline-flex ">
           <ArrowLeftRight />
         </div>
         <DropdownSelect
