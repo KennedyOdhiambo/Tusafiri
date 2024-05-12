@@ -1,6 +1,7 @@
 'use client'
 
 import useQueryString from '@/lib/hooks/useQueryString'
+import { formatDate } from '@/lib/utils'
 import { MoveRight } from 'lucide-react'
 import Image, { StaticImageData } from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -16,9 +17,12 @@ export default function TravelRouteCard({ src, from, to }: TravelRouteCardProps)
   const [cardActive, setCardActive] = useState(false)
   const router = useRouter()
   const createQueryString = useQueryString()
+  const defaultDate = formatDate(new Date())
 
   const handleClick = () => {
-    router.push(`/booking?${createQueryString('from', from)}&${createQueryString('to', to)}`)
+    router.push(
+      `/booking?${createQueryString('from', from)}&${createQueryString('to', to)}&${createQueryString('date', defaultDate)}`,
+    )
   }
   return (
     <div
