@@ -15,7 +15,7 @@ type DatePickerProps = {
   handleDateChange: (date: Date | undefined) => void
 }
 export function DatePicker({ initialDate, handleDateChange }: DatePickerProps) {
-  const [date, setDate] = useState<Date | undefined>(initialDate)
+  const [date, setDate] = useState<Date | undefined>(initialDate ? initialDate : new Date())
 
   const handleSelect = (selectedDate: Date | undefined) => {
     handleDateChange(selectedDate)

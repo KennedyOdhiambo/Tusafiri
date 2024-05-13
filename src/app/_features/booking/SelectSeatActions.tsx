@@ -1,12 +1,19 @@
-import { Button } from '@/components/ui/button';
-import React from 'react';
+import React from 'react'
+import ProceedtoPaymentButton from './ProceedtoPaymentButton'
 
-export default function SelectSeatActions() {
+export default function SelectSeatActions({
+  selectedSeats,
+  ticketPrice,
+}: {
+  selectedSeats: Array<string>
+  ticketPrice: string
+}) {
+  const selectedSeatsCount = selectedSeats.length
   return (
     <div className="mt-4 flex flex-col gap-1 border-none bg-transparent shadow-none">
       <div className="hidden flex-row items-center justify-between gap-2 md:flex">
         <h3 className="text-sm font-semibold">Selected Seats:</h3>
-        <span className="text-base">1</span>
+        <span className="text-base">{selectedSeatsCount}</span>
       </div>
 
       <div className="hidden h-fit flex-row items-center justify-between gap-2 md:flex">
@@ -14,7 +21,7 @@ export default function SelectSeatActions() {
         <span className="text-base">Ksh. 500</span>
       </div>
 
-      <Button className="">Proceed to payment</Button>
+      <ProceedtoPaymentButton selectedSeatsCount={selectedSeatsCount} ticketCost={ticketPrice} />
     </div>
-  );
+  )
 }

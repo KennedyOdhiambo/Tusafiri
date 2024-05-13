@@ -1,8 +1,8 @@
 type SeatProps = {
-  id: number;
-  status: string;
-  onSeatClick: (id: number) => void;
-};
+  id: number
+  status: string
+  onSeatClick: (id: string) => void
+}
 
 export default function Seat({ id, status, onSeatClick }: SeatProps) {
   return (
@@ -15,9 +15,9 @@ export default function Seat({ id, status, onSeatClick }: SeatProps) {
                       ? 'text-secondary-accent bg-secondary'
                       : 'cursor-not-allowed bg-destructive text-destructive-foreground'
                 }`}
-      onClick={() => onSeatClick(id)}
+      onClick={() => onSeatClick(String(id))}
     >
       {id}
     </button>
-  );
+  )
 }

@@ -1,12 +1,25 @@
-'use client';
-import React from 'react';
-import Seat from './Seat';
-import { LifeBuoy } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
-import Seatslegend from './Seatslegend';
-import SelectSeatActions from './SelectSeatActions';
+'use client'
+import React, { useState } from 'react'
+import Seat from './Seat'
+import { LifeBuoy } from 'lucide-react'
+import { Card, CardContent } from '@/components/ui/card'
+import Seatslegend from './Seatslegend'
+import SelectSeatActions from './SelectSeatActions'
 
-export default function SelectSeat() {
+export default function SelectSeat({ ticketPrice }: { ticketPrice: string }) {
+  const [selectedSeats, setSelectedSeats] = useState<Array<string>>([])
+
+  let selected = []
+  const handleSelectedSeat = (seatId: string) => {
+    const indexOfSelectedSeat = selectedSeats.findIndex((seat) => seat === seatId)
+    if (indexOfSelectedSeat === -1) {
+      selected = [...selectedSeats, seatId]
+    } else {
+      selected = selectedSeats.filter((value) => value !== seatId)
+    }
+    setSelectedSeats(selected)
+  }
+
   return (
     <div className="flex flex-col gap-2 md:flex-row md:gap-6 lg:gap-12">
       <Card className=" w-fit items-center bg-transparent">
@@ -15,29 +28,29 @@ export default function SelectSeat() {
           {Array.from({ length: 10 }, (_, i) => (
             <div key={i} className="inline-flex justify-between">
               <div className="flex flex-row gap-0.5">
-                <Seat key={''} id={1} status={'available'} onSeatClick={() => console.log('clicked')} />
-                <Seat key={''} id={2} status={'taken'} onSeatClick={() => console.log('clicked')} />
+                <Seat key={Math.random()} id={i} status={'available'} onSeatClick={handleSelectedSeat} />
+                <Seat key={Math.random()} id={i} status={'taken'} onSeatClick={handleSelectedSeat} />
               </div>
               <div className="flex flex-row gap-0.5">
-                <Seat key={''} id={3} status={'available'} onSeatClick={() => console.log('clicked')} />
-                <Seat key={''} id={4} status={'selected'} onSeatClick={() => console.log('clicked')} />
+                <Seat key={Math.random()} id={i} status={'available'} onSeatClick={handleSelectedSeat} />
+                <Seat key={Math.random()} id={i} status={'selected'} onSeatClick={handleSelectedSeat} />
               </div>
             </div>
           ))}
           <div className="flex flex-row gap-0.5">
-            <Seat key={''} id={5} status={'available'} onSeatClick={() => console.log('clicked')} />
-            <Seat key={''} id={6} status={'taken'} onSeatClick={() => console.log('clicked')} />
-            <Seat key={''} id={7} status={'available'} onSeatClick={() => console.log('clicked')} />
-            <Seat key={''} id={8} status={'available'} onSeatClick={() => console.log('clicked')} />
-            <Seat key={''} id={9} status={'taken'} onSeatClick={() => console.log('clicked')} />
+            <Seat key={Math.random()} id={5} status={'available'} onSeatClick={handleSelectedSeat} />
+            <Seat key={Math.random()} id={6} status={'taken'} onSeatClick={handleSelectedSeat} />
+            <Seat key={Math.random()} id={7} status={'available'} onSeatClick={handleSelectedSeat} />
+            <Seat key={Math.random()} id={8} status={'available'} onSeatClick={handleSelectedSeat} />
+            <Seat key={Math.random()} id={9} status={'taken'} onSeatClick={handleSelectedSeat} />
           </div>
         </CardContent>
       </Card>
 
       <div className="flex flex-col justify-between">
         <Seatslegend />
-        <SelectSeatActions />
+        <SelectSeatActions selectedSeats={selectedSeats} ticketPrice={ticketPrice} />
       </div>
     </div>
-  );
+  )
 }
